@@ -69,7 +69,7 @@ class NMExtension(Extension):
 	has_new = False
 	for p in profiles:
 		# First check profiles cache, if not in cache - get details from NM
-		if profile_cache.has_key(p):
+		if p in profile_cache:
 			type = profile_cache[p]
 		else:
 			type = con_details(p)
