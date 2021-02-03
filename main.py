@@ -195,25 +195,22 @@ class NMExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
+        term = (event.get_argument() or "").lower()
         keyword = event.get_keyword()
 
         if keyword == extension.preferences["nm"]:
-            term = (event.get_argument() or "").lower()
             profiles_list = extension.list_all(term)
             return RenderResultListAction(profiles_list[:15])
 
         if keyword == extension.preferences["nms"]:
-            term = (event.get_argument() or "").lower()
             profiles_list = extension.list_settings(term)
             return RenderResultListAction(profiles_list[:15])
 
         if keyword == extension.preferences["nm-vpn"]:
-            term = (event.get_argument() or "").lower()
             profiles_list = extension.list_vpn(term)
             return RenderResultListAction(profiles_list[:15])
 
         if keyword == extension.preferences["nm-wifi"]:
-            term = (event.get_argument() or "").lower()
             profiles_list = extension.list_wifi(term)
             return RenderResultListAction(profiles_list[:15])
 
