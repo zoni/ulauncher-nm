@@ -2,7 +2,7 @@
   "required_api_version": "^2.0.0",
   "name": "NetworkManager",
   "description": "Quick access to nm-cli",
-  "developer_name": "alsvartr",
+  "developer_name": "ygun",
   "icon": "images/icon.svg",
   "options": {
     "query_debounce": 0.1
