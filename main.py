@@ -15,16 +15,12 @@ logging.basicConfig()
 logger = logging.getLogger(__name__)
 
 global usage_cache, profile_cache, parent_dir
-usage_cache = {}
-profile_cache = {}
 
 # Check if nmcli is present
 nmcli = os.popen("which nmcli").read().rstrip()
 if nmcli == "":
     logger.error("nmcli executable was not found!")
     exit()
-
-parent_dir = os.path.dirname(os.path.realpath(__file__))
 
 # Init usage tracking file
 parent_dir = os.path.dirname(os.path.realpath(__file__))
@@ -33,6 +29,8 @@ if os.path.exists(usage_db):
     with open(usage_db, 'r') as db:
         raw = db.read()
         usage_cache = json.loads(raw)
+else:
+    usage_cache = {}
 
 # Init profiles cache (because NM is very slow on getting details about VPN profiles)
 profile_db = os.path.join(parent_dir, "profiles.json")
@@ -40,6 +38,8 @@ if os.path.exists(profile_db):
     with open(profile_db, 'r') as db:
         raw = db.read()
         profile_cache = json.loads(raw)
+else:
+    profile_cache = {}
 
 
 class NMExtension(Extension):
